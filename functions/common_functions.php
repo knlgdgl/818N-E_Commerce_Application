@@ -445,7 +445,8 @@ function getIPAddress()
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         $ip = $_SERVER['HTTP_CLIENT_IP'];
     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $xff_header = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $ip = strtok($xff_header, ',');
     } else {
         $ip = $_SERVER['REMOTE_ADDR'];
     }
